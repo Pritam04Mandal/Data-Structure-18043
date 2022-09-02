@@ -257,20 +257,21 @@ class SLL
                 cout<<"List is empty"<<endl;
             }
             else{
-                temp=first;
-                node *temporary=first;
-                while(temp!=nullptr){
-                    node *temp3=temp;
-                    while(temp3->next!=last)
-                    {
-                        temp3=temp3->next;
-                        temp1=temp3;
-                        
+                temp1=last;
+                node *temp2;
+                while(temp1!=first)
+                {
+                    temp2=first;
+                    while(temp2->next!=last){
+                        temp2=temp2->next;
                     }
-                    last->next=temp1;
-                    first=last;
-                    temp=temp->next;
+                    temp1->next=temp2;
+                    temp1=temp2;
                 }
+                first->next=nullptr;
+                temp=last;
+                last=first;
+                first=temp;
 
             }
         }
