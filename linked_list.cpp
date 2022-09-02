@@ -9,14 +9,15 @@
 */
 #include <iostream>
 using namespace std;
-
 class node{
-    public:
-        int data;
-        node *next;
-};
+        public:
+            int data;
+            node *next;
+    };
+
 class SLL
 {
+    
     node *first=nullptr,*last=nullptr,*temp=nullptr,*temp1=nullptr;
     public:
         static int pos;
@@ -59,6 +60,7 @@ class SLL
         }
         void display()
         {
+            cout<<endl;
             if(first==nullptr)
             {
                 cout<<"List is empty cannot not print"<<endl;
@@ -86,6 +88,14 @@ class SLL
                 temp->next=nullptr;
                 first=temp;
                 last=temp;
+                pos++;
+            }
+            else if(position==0)
+            {
+                temp1=new node;
+                temp1->data=value;
+                temp1->next=first;
+                first=temp1;
                 pos++;
             }
             else{
@@ -203,14 +213,82 @@ class SLL
             }
 
         }
-        void concatenate(SLL s2)
+        void operator +(SLL s2)
         {
-            this->last->next=s2.first;
+            if(first==nullptr)
+            {
+                first=s2.first;
+                last=s2.last;
+                
+                
+            }
+            
+            else{
+                last->next=s2.first;
+                pos+=s2.pos;
+                }
+            
+        }
+        int search(int search)
+        {
+            if(first==nullptr)
+            {
+                cout<<"List is empty cannot not search"<<endl;
+            }
+            else{
+                temp=first;
+                for(int i=0;i<pos;i++)
+                {
+                    if(temp->data==search)
+                    {
+                        cout<<"Data found!!!!";
+                        return i;
+                    }
+                }
+                
+            }
+            cout<<"Data not found..."<<endl;
+            return -1;
+        }
+        void reverse()
+        {
+            if(first==nullptr)
+            {
+                cout<<"List is empty"<<endl;
+            }
+            else{
+                temp=first;
+                node *temporary=first;
+                while(temp!=nullptr){
+                    node *temp3=temp;
+                    while(temp3->next!=last)
+                    {
+                        temp3=temp3->next;
+                        temp1=temp3;
+                        
+                    }
+                    last->next=temp1;
+                    first=last;
+                    temp=temp->next;
+                }
+
+            }
+        }
+        ~SLL()
+        {
+            temp=first;
+            while(temp!=nullptr){
+                temp1=temp;
+                delete temp1;
+                temp=temp->next;
+            }
+            delete temp;
         } 
 };
-int SLL::pos=0;
+int SLL::pos=-1;
 int main()
 {
+    system("cls");
     SLL s;
     char choice='Y';
     while((choice=='y') || (choice=='Y'))
@@ -221,7 +299,9 @@ int main()
             <<"4. delete from ith position"<<endl
             <<"5. search an element"<<endl
             <<"6. Concatenate two list"<<endl
-            <<"7. Close the program"<<endl;
+            <<"7. Display the Singly Linked List"<<endl
+            <<"8. Display reverse of Singly Linked List"<<endl
+            <<"9. Close the program"<<endl;
         int ch=0;
         cout<<"Enter your choice: ";
         cin>>ch;
@@ -268,6 +348,18 @@ int main()
                 break;
 
             }
+            case 5:
+            {   int search;
+                cout<<"Enter the value you want to search: ";
+                cin>>search;
+                int position=s.search(search);
+                if(position!=-1)
+                {
+                    cout<<"at "<<position<<endl;
+                }
+                break;
+
+            }
             case 6:
             {
                 int n;
@@ -279,10 +371,22 @@ int main()
                     cout<<"Enter the value you want to enter at head of new list: ";cin>>value;
                     s2.add_to_head(value);
                 }
-                s.concatenate(s2);
+                s+s2;
                 s.display();
+                break;
             }
             case 7:
+            {
+                s.display();
+                break;
+            }
+            case 8:
+            {
+                s.reverse();
+                cout<<endl;
+                break;
+            }
+            case 9:
             {
                 cout<<"the program will now exit"<<endl;
                 return 0;
