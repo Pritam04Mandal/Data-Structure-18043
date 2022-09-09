@@ -18,8 +18,12 @@ class node{
 class SLL
 {
     
-    node *first=nullptr,*last=nullptr,*temp=nullptr,*temp1=nullptr;
+    node *first,*last,*temp,*temp1;
     public:
+        SLL()
+        {
+            first=nullptr,last=nullptr,temp=nullptr,temp1=nullptr;
+        }
         static int pos;
         /* void add_to_tail(int value)
         {
