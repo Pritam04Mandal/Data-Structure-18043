@@ -11,10 +11,15 @@ class DLL{
 			node *next;
 			node *prev;
 	};
-	node *first=nullptr,*temp1=nullptr;
-	node *last=nullptr;
-	node*temp=nullptr;
+	node *first,*temp1;
+	node *last;
+	node*temp;
 	public:
+        DLL()
+        {
+            first=nullptr;
+            last=temp=temp1=nullptr;
+        }
 		
 		static int pos;
 		void add_to_head(x num)
@@ -27,8 +32,8 @@ class DLL{
         		if(first==nullptr)
             	{
 
-            		cout<<"Enter the value: ";
-        			cin>>value;
+            		std::cout<<"Enter the value: ";
+        			std::cin>>value;
                 	temp=new node;
                 	temp->data=value;
                 	temp->next=nullptr;
@@ -38,8 +43,8 @@ class DLL{
                 	pos++;
             	}
             	else{
-            		cout<<"Enter the value: ";
-        			cin>>value;
+            		std::cout<<"Enter the value: ";
+        			std::cin>>value;
                 	temp=new node;
                 	temp->data=value;
                 	temp->next=first;
@@ -54,8 +59,8 @@ class DLL{
         {
             if(first==nullptr)
             {
-                cout<<"list is empty"<<endl;
-                cout<<"new list created"<<endl;
+                std::cout<<"list is empty"<<endl;
+                std::cout<<"new list created"<<endl;
                 temp=new node;
                 temp->data=value;
                 temp->prev=nullptr;
@@ -97,20 +102,20 @@ class DLL{
         {
         	if(first==nullptr)
         	{
-        		cout<<endl<<"List is empty"<<endl;
+        		std::cout<<endl<<"List is empty"<<endl;
         	}
         	else
         	{
-        		cout<<endl;
+        		std::cout<<endl;
 	        	temp=first;
 	        	do
 	        	{
-	        		cout<<temp->data<<"->";
+	        		std::cout<<temp->data<<"->";
 
 	        		temp=temp->next;
 
 	        	}while(temp!=nullptr);
-	        	cout<<endl;
+	        	std::cout<<endl;
         	}
         }
         void add_to_tail(int num)
@@ -122,8 +127,8 @@ class DLL{
         		if(first==nullptr)
             	{
 
-            		cout<<"Enter the value: ";
-        			cin>>value;
+            		std::cout<<"Enter the value: ";
+        			std::cin>>value;
                 	temp=new node;
                 	temp->data=value;
                 	temp->next=nullptr;
@@ -133,8 +138,8 @@ class DLL{
                 	pos++;
             	}
             	else{
-            		cout<<"Enter the value: ";
-            		cin>>value;
+            		std::cout<<"Enter the value: ";
+            		std::cin>>value;
             		temp=new node;
             		temp->data=value;
             		last->next=temp;
@@ -149,7 +154,7 @@ class DLL{
         {
         	if(first==nullptr)
         	{
-        		cout<<endl<<"List is empty"<<endl;
+        		std::cout<<endl<<"List is empty"<<endl;
         	}
         	else
         	{
@@ -168,7 +173,7 @@ class DLL{
         {
         	if(first==nullptr)
         	{
-        		cout<<endl<<"List is empty"<<endl;
+        		std::cout<<endl<<"List is empty"<<endl;
         	}
         	else
         	{
@@ -187,7 +192,7 @@ class DLL{
         {
         	if(first==nullptr)
         	{
-        		cout<<endl<<"List is empty"<<endl;
+        		std::cout<<endl<<"List is empty"<<endl;
         	}
         	else
         	{
@@ -211,7 +216,7 @@ class DLL{
         {
         	if(first==nullptr)
         	{
-        		cout<<"List is empty"<<endl;
+        		std::cout<<"List is empty"<<endl;
         	}
         	else
         	{
@@ -230,18 +235,30 @@ class DLL{
         	}
         	return -1;
         }
+        void operator +(DLL <x>s2)
+        {
+            if(this->first==nullptr)
+            {
+                this->first=s2.first;
+                this->last=s2.last;
+            }
+            else{
+                this->last->next=s2.first;
+                s2.first->prev=this->last;
+            }
+        }
         ~DLL()
         {
         	temp=first;
-        	while(temp!=nullptr)
-        	{
-        		temp1=temp;
-        		delete temp1;
-        		temp=temp->next;
-        	}
-        	delete temp;
-        	delete first;
-        	delete last;
+            temp1=first;
+            while (temp!=nullptr)
+            {
+                delete temp1;
+                temp1=temp->next;
+                temp=temp->next;
+            }
+            delete temp;
+            
         }
 
 
@@ -250,396 +267,402 @@ template <class x>
 int DLL <x>::pos=0;
 int main()
 {
-    int chc;
-    cout<<endl<<"1. For integer values"<<endl<<"2. For Decimal values"<<endl<<"3. For Character values"<<endl;
-    cout<<"Enter you choice: ";
-    cin>>chc;
-    if(chc==1)
+    char CHOICE='y';
+    while((CHOICE=='y')||(CHOICE=='Y'))
     {
-        DLL <int>s;
-        char choice='y';
-        while((choice=='y')||(choice=='Y'))
+        int chc;
+        std::cout<<endl<<"1. For integer values"<<endl<<"2. For Decimal values"<<endl<<"3. For Character values"<<endl;
+        std::cout<<"Enter you choice: ";
+        std::cin>>chc;
+        if(chc==1)
         {
-            cout<<"1. add to head"<<endl
-                <<"2. add at ith position of the list"<<endl
-                <<"3. add to tail"<<endl
-                <<"4. delete from head"<<endl
-                <<"5. delete from ith position"<<endl
-                <<"6. delete from tail"<<endl
-                <<"7. search an element"<<endl
-                <<"8. concatenate to list"<<endl
-                <<"9. display the list"<<endl;
-            int ch=0;
-            cout<<"Enter your choice: ";
-            cout<<"hwllo wolrd"<<endl;
-            cin>>ch;
-            int value=0;
-            int key=0;
-            if(ch==1)
+            DLL <int>s;
+            char choice='y';
+            while((choice=='y')||(choice=='Y'))
             {
-                cout<<"Enter how many data you want to enter: ";
-                cin>>value;
-                s.add_to_head(value);
-                s.display();
-                cout<<endl;
-                
-
-            }
-            else if(ch==2)
-            {
-                cout<<"Enter the position at which you want to enter: ";
-                int position;
-                cin>>position;
-                cout<<"Enter the value";
-                cin>>value;
-                s.add_in_i_position((position-1),value);
-                s.display();
-                cout<<endl;
-                
-
-            }
-            else if(ch==3)
-            {
-                cout<<"Enter how many data you want to enter: ";
-                cin>>value;
-                s.add_to_tail(value);
-                s.display();
-                cout<<endl;
-                
-            }
-            else if(ch==4)
-            {
-                cout<<"Deleting from head"<<endl;
-                s.remove_from_head();
-                s.display();
-                
-            }
-            else if(ch==5)
-            {
-                int position;
-            cout<<"Enter the position from which you want delete: ";
-                cin>>position;
-                s.remove_from_i_position((position-1));
-                s.display();
-
-            }
-            else if(ch==6)
-            {
-                cout<<"Deleting from head"<<endl;;
-                s.remove_from_tail();
-                s.display();
-            }
-            else if(ch==7)
-            {   int search;
-                cout<<"Enter the value you want to search: ";
-                cin>>search;
-                int position=s.search(search);
-                if(position!=-1)
+                std::cout<<"1. add to head"<<endl
+                    <<"2. add at ith position of the list"<<endl
+                    <<"3. add to tail"<<endl
+                    <<"4. delete from head"<<endl
+                    <<"5. delete from ith position"<<endl
+                    <<"6. delete from tail"<<endl
+                    <<"7. search an element"<<endl
+                    <<"8. concatenate to list"<<endl
+                    <<"9. display the list"<<endl;
+                int ch=0;
+                std::cout<<"Enter your choice: ";
+                std::cout<<"hwllo wolrd"<<endl;
+                std::cin>>ch;
+                int value=0;
+                int key=0;
+                if(ch==1)
                 {
-                    cout<<"at "<<position<<endl;
-                }
-
-            }
-                // case 6:
-                // {
-                //     int n;
-                //     cout<<"Enter the number of data you want to enter: ";
-                //     cin>>n;
-                //     SLL <int>s2;
-                //     for(int i=0;i<n;i++)
-                //     {
-                //         cout<<"Enter the value you want to enter at head of new list: ";cin>>value;
-                //         s2.add_to_head(value);
-                //     }
-                //     s+s2;
-                //     s.display();
-                //     break;
-                // }
-            else if(ch==8)
-            {
-                s.display();
-            }
-                // case 8:
-                // {
-                //     s.reverse();
-                //     cout<<endl;
-                //     break;
-                // }
-            else if(ch==9)
-            {
-                cout<<"Now breaking the loop"<<endl;
-                choice=false;
-            }
-            else
-            {
-                cout<<"Wrong choice"<<endl;
-            }
-            cout<<"do you want to continue(Y/N): ";
-            cin>>choice;
-        }
-    }
-    else if(chc==2)
-    {
-        DLL <float>s;
-        char choice='Y';
-        while((choice=='y') || (choice=='Y'))
-        {
-            cout<<"1. add to head"<<endl
-                <<"2. add at ith position of the list"<<endl
-                <<"3. add to tail"<<endl
-                <<"4. delete from head"<<endl
-                <<"5. delete from ith position"<<endl
-                <<"6. delete from tail"<<endl
-                <<"7. search an element"<<endl
-                <<"8. concatenate to list"<<endl
-                <<"9. display the list"<<endl;
-            int ch=0;
-            cout<<"Enter your choice: ";
-            cin>>ch;
-            float value=0;
-            int key=0;
-            switch(ch){
-                case 1:
-                {
-                    cout<<"Enter how many data you want to enter: ";
-                    cin>>value;
+                    std::cout<<"Enter how many data you want to enter: ";
+                    std::cin>>value;
                     s.add_to_head(value);
                     s.display();
-                    cout<<endl;
-                    break;
+                    std::cout<<endl;
+                    
 
                 }
-                 case 2:
+                else if(ch==2)
                 {
-                    cout<<"Enter the position at which you want to enter: ";
+                    std::cout<<"Enter the position at which you want to enter: ";
                     int position;
-                    cin>>position;
-                    cout<<"Enter the value";
-                    cin>>value;
+                    std::cin>>position;
+                    std::cout<<"Enter the value";
+                    std::cin>>value;
                     s.add_in_i_position((position-1),value);
                     s.display();
-                    cout<<endl;
-                    break;
+                    std::cout<<endl;
+                    
 
                 }
-                case 3:
+                else if(ch==3)
                 {
-                	cout<<"Enter how many data you want to enter: ";
-                    cin>>value;
+                    std::cout<<"Enter how many data you want to enter: ";
+                    std::cin>>value;
                     s.add_to_tail(value);
                     s.display();
-                    cout<<endl;
-                    break;
+                    std::cout<<endl;
+                    
                 }
-                case 4:
+                else if(ch==4)
                 {
-                    cout<<"Deleting from head"<<endl;;
+                    std::cout<<"Deleting from head"<<endl;
                     s.remove_from_head();
                     s.display();
-                    break;
+                    
                 }
-                case 5:
+                else if(ch==5)
                 {
                     int position;
-                    cout<<"Enter the position from which you want delete: ";
-                    cin>>position;
+                    std::cout<<"Enter the position from which you want delete: ";
+                    std::cin>>position;
                     s.remove_from_i_position((position-1));
                     s.display();
-                    break;
 
                 }
-                case 6:
+                else if(ch==6)
                 {
-                	cout<<"Deleting from head"<<endl;;
+                    std::cout<<"Deleting from head"<<endl;;
                     s.remove_from_tail();
                     s.display();
-                    break;
                 }
-                case 7:
-                {   float search;
-                    cout<<"Enter the value you want to search: ";
-                    cin>>search;
+                else if(ch==7)
+                {   int search;
+                    std::cout<<"Enter the value you want to search: ";
+                    std::cin>>search;
                     int position=s.search(search);
                     if(position!=-1)
                     {
-                        cout<<"at "<<position<<endl;
+                        std::cout<<"at "<<position<<endl;
                     }
-                    break;
 
                 }
-                // case 6:
-                // {
-                //     int n;
-                //     cout<<"Enter the number of data you want to enter: ";
-                //     cin>>n;
-                //     SLL <int>s2;
-                //     for(int i=0;i<n;i++)
-                //     {
-                //         cout<<"Enter the value you want to enter at head of new list: ";cin>>value;
-                //         s2.add_to_head(value);
-                //     }
-                //     s+s2;
-                //     s.display();
-                //     break;
-                // }
-                case 8:
+                else if(ch==8)
+                {
+                    DLL <int>s2;
+                    std::cout<<"How many data you want to enter in the second list: ";
+                    int num1;
+                    std::cin>>num1;
+                    s2.add_to_head(num1);
+                    std::cout<<"Second list"<<endl;
+                    s2.display();
+                    std::cout<<"After concatenation"<<endl;
+                    s+s2;
+                    s.display();
+
+                }
+                else if(ch==9)
                 {
                     s.display();
-                    break;
                 }
-                // case 8:
-                // {
-                //     s.reverse();
-                //     cout<<endl;
-                //     break;
-                // }
-                case 9:
+                else
                 {
-                    cout<<"the program will now exit"<<endl;
-                    return 0;
+                    std::cout<<"Wrong choice"<<endl;
                 }
-                default:{
-                    cout<<"Wrong choice"<<endl;
-                    break;
-                }
+                std::cout<<"do you want to continue(Y/N): ";
+                std::cin>>choice;
             }
-            cout<<"Do you want to continue(Y/N): ";
-            cin>>choice;
         }
-    }
-    else if(chc==3)
-    {
-        DLL <char>s;
-        char choice='Y';
-        while((choice=='y') || (choice=='Y'))
+        else if(chc==2)
         {
-            cout<<"1. add to head"<<endl
-                <<"2. add at ith position of the list"<<endl
-                <<"3. add to tail"<<endl
-                <<"4. delete from head"<<endl
-                <<"5. delete from ith position"<<endl
-                <<"6. delete from tail"<<endl
-                <<"7. search an element"<<endl
-                <<"8. concatenate to list"<<endl
-                <<"9. display the list"<<endl;
-            int ch=0;
-            cout<<"Enter your choice: ";
-            cin>>ch;
-            int num=0;
-            char value=0;
-            int key=0;
-            switch(ch){
-                case 1:
-                {
-                    cout<<"Enter how many data you want to enter: ";
-                    cin>>num;
-                    s.add_to_head(num);
-                    s.display();
-                    cout<<endl;
-                    break;
-
-                }
-                 case 2:
-                {
-                    cout<<"Enter the position at which you want to enter: ";
-                    int position;
-                    cin>>position;
-                    cout<<"Enter the value";
-                    cin>>value;
-                    s.add_in_i_position((position-1),value);
-                    s.display();
-                    cout<<endl;
-                    break;
-
-                }
-                case 3:
-                {
-                	cout<<"Enter how many data you want to enter: ";
-                    cin>>value;
-                    s.add_to_tail(value);
-                    s.display();
-                    cout<<endl;
-                    break;
-                }
-                case 4:
-                {
-                    cout<<"Deleting from head"<<endl;;
-                    s.remove_from_head();
-                    s.display();
-                    break;
-                }
-                case 5:
-                {
-                    int position;
-                    cout<<"Enter the position from which you want delete: ";
-                    cin>>position;
-                    s.remove_from_i_position((position-1));
-                    s.display();
-                    break;
-
-                }
-                case 6:
-                {
-                	cout<<"Deleting from head"<<endl;;
-                    
-                    s.display();
-                    break;
-                }
-                case 7:
-                {   char search;
-                    cout<<"Enter the value you want to search: ";
-                    cin>>search;
-                    int position=s.search(search);
-                    if(position!=-1)
+            DLL <float>s;
+            char choice='Y';
+            while((choice=='y') || (choice=='Y'))
+            {
+                std::cout<<"1. add to head"<<endl
+                    <<"2. add at ith position of the list"<<endl
+                    <<"3. add to tail"<<endl
+                    <<"4. delete from head"<<endl
+                    <<"5. delete from ith position"<<endl
+                    <<"6. delete from tail"<<endl
+                    <<"7. search an element"<<endl
+                    <<"8. concatenate to list"<<endl
+                    <<"9. display the list"<<endl;
+                int ch=0;
+                std::cout<<"Enter your choice: ";
+                std::cin>>ch;
+                float value=0;
+                int key=0;
+                switch(ch){
+                    case 1:
                     {
-                        cout<<"at "<<position<<endl;
-                    }
-                    break;
+                        std::cout<<"Enter how many data you want to enter: ";
+                        std::cin>>value;
+                        s.add_to_head(value);
+                        s.display();
+                        std::cout<<endl;
+                        break;
 
+                    }
+                    case 2:
+                    {
+                        std::cout<<"Enter the position at which you want to enter: ";
+                        int position;
+                        std::cin>>position;
+                        std::cout<<"Enter the value";
+                        std::cin>>value;
+                        s.add_in_i_position((position-1),value);
+                        s.display();
+                        std::cout<<endl;
+                        break;
+
+                    }
+                    case 3:
+                    {
+                        std::cout<<"Enter how many data you want to enter: ";
+                        std::cin>>value;
+                        s.add_to_tail(value);
+                        s.display();
+                        std::cout<<endl;
+                        break;
+                    }
+                    case 4:
+                    {
+                        std::cout<<"Deleting from head"<<endl;;
+                        s.remove_from_head();
+                        s.display();
+                        break;
+                    }
+                    case 5:
+                    {
+                        int position;
+                        std::cout<<"Enter the position from which you want delete: ";
+                        std::cin>>position;
+                        s.remove_from_i_position((position-1));
+                        s.display();
+                        break;
+
+                    }
+                    case 6:
+                    {
+                        std::cout<<"Deleting from head"<<endl;;
+                        s.remove_from_tail();
+                        s.display();
+                        break;
+                    }
+                    case 7:
+                    {   float search;
+                        std::cout<<"Enter the value you want to search: ";
+                        std::cin>>search;
+                        int position=s.search(search);
+                        if(position!=-1)
+                        {
+                            std::cout<<"at "<<position<<endl;
+                        }
+                        break;
+
+                    }
+                    // case 6:
+                    // {
+                    //     int n;
+                    //     std::cout<<"Enter the number of data you want to enter: ";
+                    //     std::cin>>n;
+                    //     SLL <int>s2;
+                    //     for(int i=0;i<n;i++)
+                    //     {
+                    //         std::cout<<"Enter the value you want to enter at head of new list: ";std::cin>>value;
+                    //         s2.add_to_head(value);
+                    //     }
+                    //     s+s2;
+                    //     s.display();
+                    //     break;
+                    // }
+                    case 9:
+                    {
+                        s.display();
+                        break;
+                    }
+                    case 8:
+                    {
+                        DLL <float>s2;
+                        std::cout<<"How many data you want to enter in the second list: ";
+                        int num1;
+                        std::cin>>num1;
+                        s2.add_to_head(num1);
+                        std::cout<<"Second list"<<endl;
+                        s2.display();
+                        std::cout<<"After concatenation"<<endl;
+                        s+s2;
+                        s.display();
+                        break;
+                    }
+                    default:{
+                        std::cout<<"Wrong choice"<<endl;
+                        break;
+                    }
                 }
-                // case 6:
-                // {
-                //     int n;
-                //     cout<<"Enter the number of data you want to enter: ";
-                //     cin>>n;
-                //     SLL <int>s2;
-                //     for(int i=0;i<n;i++)
-                //     {
-                //         cout<<"Enter the value you want to enter at head of new list: ";cin>>value;
-                //         s2.add_to_head(value);
-                //     }
-                //     s+s2;
-                //     s.display();
-                //     break;
-                // }
-                case 8:
-                {
-                    s.display();
-                    break;
-                }
-                // case 8:
-                // {
-                //     s.reverse();
-                //     cout<<endl;
-                //     break;
-                // }
-                case 9:
-                {
-                    cout<<"the program will now exit"<<endl;
-                    return 0;
-                }
-                default:{
-                    cout<<"Wrong choice"<<endl;
-                    break;
-                }
+                std::cout<<"Do you want to continue(Y/N): ";
+                std::cin>>choice;
             }
-            cout<<"Do you want to continue(Y/N): ";
-            cin>>choice;
         }
-    }
-    else
-    {
-        cout<<"Wrong Choice"<<endl;
+        else if(chc==3)
+        {
+            DLL <char>s;
+            char choice='Y';
+            while((choice=='y') || (choice=='Y'))
+            {
+                std::cout<<"1. add to head"<<endl
+                    <<"2. add at ith position of the list"<<endl
+                    <<"3. add to tail"<<endl
+                    <<"4. delete from head"<<endl
+                    <<"5. delete from ith position"<<endl
+                    <<"6. delete from tail"<<endl
+                    <<"7. search an element"<<endl
+                    <<"8. concatenate to list"<<endl
+                    <<"9. display the list"<<endl;
+                int ch=0;
+                std::cout<<"Enter your choice: ";
+                std::cin>>ch;
+                int num=0;
+                char value=0;
+                int key=0;
+                switch(ch){
+                    case 1:
+                    {
+                        std::cout<<"Enter how many data you want to enter: ";
+                        std::cin>>num;
+                        s.add_to_head(num);
+                        s.display();
+                        std::cout<<endl;
+                        break;
+
+                    }
+                    case 2:
+                    {
+                        std::cout<<"Enter the position at which you want to enter: ";
+                        int position;
+                        std::cin>>position;
+                        std::cout<<"Enter the value";
+                        std::cin>>value;
+                        s.add_in_i_position((position-1),value);
+                        s.display();
+                        std::cout<<endl;
+                        break;
+
+                    }
+                    case 3:
+                    {
+                        std::cout<<"Enter how many data you want to enter: ";
+                        std::cin>>value;
+                        s.add_to_tail(value);
+                        s.display();
+                        std::cout<<endl;
+                        break;
+                    }
+                    case 4:
+                    {
+                        std::cout<<"Deleting from head"<<endl;;
+                        s.remove_from_head();
+                        s.display();
+                        break;
+                    }
+                    case 5:
+                    {
+                        int position;
+                        std::cout<<"Enter the position from which you want delete: ";
+                        std::cin>>position;
+                        s.remove_from_i_position((position-1));
+                        s.display();
+                        break;
+
+                    }
+                    case 6:
+                    {
+                        std::cout<<"Deleting from head"<<endl;;
+                        
+                        s.display();
+                        break;
+                    }
+                    case 7:
+                    {   char search;
+                        std::cout<<"Enter the value you want to search: ";
+                        std::cin>>search;
+                        int position=s.search(search);
+                        if(position!=-1)
+                        {
+                            std::cout<<"at "<<position<<endl;
+                        }
+                        break;
+
+                    }
+                    // case 6:
+                    // {
+                    //     int n;
+                    //     std::cout<<"Enter the number of data you want to enter: ";
+                    //     std::cin>>n;
+                    //     SLL <int>s2;
+                    //     for(int i=0;i<n;i++)
+                    //     {
+                    //         std::cout<<"Enter the value you want to enter at head of new list: ";std::cin>>value;
+                    //         s2.add_to_head(value);
+                    //     }
+                    //     s+s2;
+                    //     s.display();
+                    //     break;
+                    // }
+                    case 8:
+                    {
+                        DLL <char>s2;
+                        std::cout<<"How many data you want to enter in the second list: ";
+                        int num1;
+                        std::cin>>num1;
+                        s2.add_to_head(num1);
+                        std::cout<<"Second list"<<endl;
+                        s2.display();
+                        std::cout<<"After concatenation"<<endl;
+                        s+s2;
+                        s.display();
+                        break;
+                    }
+                    case 9:
+                    {
+                        s.display();
+                        break;
+                    }
+                    // case 8:
+                    // {
+                    //     s.reverse();
+                    //     std::cout<<endl;
+                    //     break;
+                    // }
+                    default:{
+                        std::cout<<"Wrong choice"<<endl;
+                        break;
+                    }
+                }
+                std::cout<<"Do you want to continue(Y/N): ";
+                std::cin>>choice;
+            }
+        }
+        else
+        {
+            std::cout<<"Wrong Choice"<<endl;
+        }
+        std::cout<<"do you want to continue(Y/N): ";
+        std::cin>>CHOICE;
     }
     return 0;
     
