@@ -11,7 +11,7 @@ class Stack
         Stack(int n)
         {
             size=n;
-            arr=new int(n);
+            arr=new x(n);
             for(int i=0;i<n;i++)
             {
                 arr[i]=0;
